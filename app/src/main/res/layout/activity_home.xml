@@ -4,32 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <include
-        android:id="@+id/vHeader"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        layout="@layout/component_header"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <include
-        android:id="@+id/vCard1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        layout="@layout/component_card_item"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vHeader"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <include
-        android:id="@+id/vCard2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        layout="@layout/component_card_item2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vCard1"
-        app:layout_constraintEnd_toEndOf="parent"/>
 
 
     <androidx.core.widget.NestedScrollView
@@ -40,11 +15,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <include
+                android:id="@+id/vHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/component_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <include
+                android:id="@+id/vCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/component_card_item"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vHeader"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <include
+                android:id="@+id/vComponentHome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/component_home_ewallet"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vCard"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
