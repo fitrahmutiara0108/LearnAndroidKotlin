@@ -30,21 +30,21 @@
                 app:layout_constraintEnd_toEndOf="parent"/>
 
             <include
-                android:id="@+id/vCard"
+                android:id="@+id/vComponentHomeSaving"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                layout="@layout/component_card_item"
+                layout="@layout/component_home_saving"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/vHeader"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
             <include
-                android:id="@+id/vComponentHome"
+                android:id="@+id/vComponentHomeEwallet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 layout="@layout/component_home_ewallet"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/vCard"
+                app:layout_constraintTop_toBottomOf="@id/vComponentHomeSaving"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
         </LinearLayout>

@@ -48,7 +48,9 @@ class EwalletAdapter : RecyclerView.Adapter<EwalletAdapter.ViewHolder>() {
 
             itemBinding.tvBalance.text = ewallet.balance.toString()
             itemBinding.ivEwallet.setImageResource(ewallet.image)
-            itemBinding.btnConnectAccount.setOnClickListener{ onClickEwallet.invoke(ewallet)}
+            itemBinding.btnConnectAccount.setOnClickListener{
+                onClickEwallet.invoke(ewallet)
+            }
 
         }
     }
