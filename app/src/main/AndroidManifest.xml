@@ -14,7 +14,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,9 +23,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".HomeActivity"/>
-        <activity android:name=".ProfileActivity"/>
-        <activity android:name=".RegisterActivity"/>
+        <activity android:name=".presentation.home.HomeActivity"/>
+        <activity android:name=".presentation.ProfileActivity"/>
+        <activity android:name=".presentation.RegisterActivity"/>
+        <activity android:name=".presentation.HomeMainActivity"/>
+        <activity android:name=".presentation.home.HomeFragment"/>
+        <activity android:name=".presentation.message.MessageFragment"/>
+        <activity android:name=".presentation.ProfileFragment"/>
+        <activity android:name=".presentation.PromoFragment"/>
+        <activity android:name=".presentation.SettingFragment"/>
     </application>
 
 </manifest>

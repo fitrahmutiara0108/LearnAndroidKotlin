@@ -1,11 +1,9 @@
 package com.mandiri.mandiriapps.adapter
 
-import android.service.autofill.OnClickAction
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.mandiri.mandiriapps.databinding.ComponentCardItemBinding
 import com.mandiri.mandiriapps.databinding.ItemEwalletBinding
 import com.mandiri.mandiriapps.model.EwalletModel
 

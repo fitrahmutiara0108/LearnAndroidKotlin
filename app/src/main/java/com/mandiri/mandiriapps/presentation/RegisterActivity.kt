@@ -1,8 +1,7 @@
-package com.mandiri.mandiriapps
+package com.mandiri.mandiriapps.presentation
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.inputmethod.InputBinding
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.mandiri.mandiriapps.databinding.ActivityRegisterBinding
