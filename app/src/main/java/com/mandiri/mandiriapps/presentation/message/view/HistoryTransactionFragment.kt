@@ -1,15 +1,18 @@
 package com.mandiri.mandiriapps.presentation.message.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.mandiri.mandiriapps.adapter.MessageTabAdapter
+import com.mandiri.mandiriapps.R
+import com.mandiri.mandiriapps.adapter.HistoryTransactionAdapter
 import com.mandiri.mandiriapps.databinding.FragmentHistoryTransactionBinding
-import com.mandiri.mandiriapps.databinding.FragmentMessageBinding
+import com.mandiri.mandiriapps.model.HistoryTransactionModel
+import com.mandiri.mandiriapps.presentation.DetailTransactionActivity
 
-class HistoryTransactionFragment: Fragment() {
+class HistoryTransactionFragment : Fragment() {
     private var _binding: FragmentHistoryTransactionBinding? = null
     private val binding get() = _binding!!
 //    simbol ! untuk menandakan tidak null
@@ -19,8 +22,24 @@ class HistoryTransactionFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHistoryTransactionBinding.inflate(inflater, container, false)
+        _binding = FragmentHistoryTransactionBinding.inflate(layoutInflater)
+
+        setupViewHistoryBinding()
         return binding.root
+    }
+
+    private fun setupViewHistoryBinding() {
+        binding.vHistoryTransaction.rvHistoryTransaction.adapter = HistoryTransactionAdapter(
+            data = populateDataHistoryTransaction(),
+            onClickHistoryTransaction = {
+                navigateToDetailHistory()
+            }
+        )
+    }
+
+    private fun navigateToDetailHistory(){
+        val intent = Intent(context, DetailTransactionActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,5 +50,26 @@ class HistoryTransactionFragment: Fragment() {
         super.onDestroyView()
         //to avoid memory leaks, nullify the binding object on this method
         _binding = null
+    }
+
+    private fun populateDataHistoryTransaction(): List<HistoryTransactionModel> {
+        return listOf(
+            HistoryTransactionModel(
+                date = "11 Januari 2024",
+                titleTransaction = "Debit",
+                subtitleTransaction = "Transfer Mandiri - Tiara",
+                balanceTransaction = "Rp200.000,00",
+                iconTransaction = R.drawable.baseline_account_balance_wallet_24,
+                statusTransaction = 1
+            ),
+            HistoryTransactionModel(
+                date = "12 Januari 2024",
+                titleTransaction = "Credit",
+                subtitleTransaction = "Transfer Mandiri - Rens",
+                balanceTransaction = "Rp300.000,00",
+                iconTransaction = R.drawable.baseline_credit_score_24,
+                statusTransaction = 2
+            )
+        )
     }
 }

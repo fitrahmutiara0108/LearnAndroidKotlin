@@ -13,8 +13,6 @@
         tools:itemCount="5"
         tools:listitem="@layout/item_ewallet"
         android:orientation="horizontal">
-
-
     </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

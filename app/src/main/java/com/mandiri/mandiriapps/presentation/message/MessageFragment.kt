@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainer
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mandiri.mandiriapps.adapter.MessageTabAdapter
+import com.mandiri.mandiriapps.databinding.ActivityDetailTransactionBinding
+import com.mandiri.mandiriapps.databinding.ComponentToolbarBinding
 import com.mandiri.mandiriapps.databinding.FragmentHomeBinding
 import com.mandiri.mandiriapps.databinding.FragmentMessageBinding
 import com.mandiri.mandiriapps.databinding.FragmentProfileBinding
@@ -35,14 +37,16 @@ class MessageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpTabView()
+
+        binding.vToolbar.tvTitle.text = "Message"
     }
 
     private fun setUpTabView() {
         val tabLayout = binding.tabMessage
         val viewPager = binding.vpMessage
         adapterMessage = MessageTabAdapter(this)
-        adapterMessage?.addListFragment(NotificationFragment())
-        adapterMessage?.addListFragment(HistoryTransactionFragment())
+//        adapterMessage?.addListFragment(NotificationFragment())
+//        adapterMessage?.addListFragment(HistoryTransactionFragment())
         viewPager.adapter = adapterMessage
 
         TabLayoutMediator(tabLayout, viewPager){ tab, position ->

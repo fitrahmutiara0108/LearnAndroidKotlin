@@ -27,6 +27,7 @@
         <activity android:name=".presentation.ProfileActivity"/>
         <activity android:name=".presentation.RegisterActivity"/>
         <activity android:name=".presentation.HomeMainActivity"/>
+        <activity android:name=".presentation.DetailTransactionActivity"/>
         <activity android:name=".presentation.home.HomeFragment"/>
         <activity android:name=".presentation.message.MessageFragment"/>
         <activity android:name=".presentation.ProfileFragment"/>

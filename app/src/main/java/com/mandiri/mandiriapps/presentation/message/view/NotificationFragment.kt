@@ -5,9 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.mandiri.mandiriapps.R
 import com.mandiri.mandiriapps.adapter.MessageTabAdapter
+import com.mandiri.mandiriapps.adapter.NotificationAdapter
 import com.mandiri.mandiriapps.databinding.FragmentMessageBinding
 import com.mandiri.mandiriapps.databinding.FragmentNotificationBinding
+import com.mandiri.mandiriapps.model.HistoryTransactionModel
+import com.mandiri.mandiriapps.model.NotificationModel
 
 class NotificationFragment : Fragment() {
     private var _binding: FragmentNotificationBinding? = null
@@ -25,6 +29,7 @@ class NotificationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupViewNotificationBinding()
     }
 
     override fun onDestroyView() {
@@ -32,4 +37,25 @@ class NotificationFragment : Fragment() {
         //to avoid memory leaks, nullify the binding object on this method
         _binding = null
     }
+
+    private fun setupViewNotificationBinding(){
+        binding.vNotification.rvNotification.adapter = NotificationAdapter(
+            data = populateDataNotification()
+        )
+    }
+    private fun populateDataNotification(): List<NotificationModel> {
+        return listOf(
+            NotificationModel(
+                date = "11 Januari 2024",
+                title = "Anda mendapat saldo masuk",
+                description = "Saldo masuk sebesar Rp2.000.000.000,00"
+            ),
+            NotificationModel(
+                date = "12 Januari 2024",
+                title = "Anda mendapat saldo masuk",
+                description = "Saldo masuk sebesar Rp5.000.000,00"
+            )
+        )
+    }
+
 }

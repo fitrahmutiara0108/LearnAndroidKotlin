@@ -35,7 +35,6 @@
         app:tint="@color/black"
         android:rotation="180" />
 
-
     <TextView
         android:id="@+id/tvSubtitleNotif"
         android:layout_width="match_parent"
