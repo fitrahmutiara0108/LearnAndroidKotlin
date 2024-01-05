@@ -1,5 +1,6 @@
 package com.mandiri.mandiriapps.presentation.message.view
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -32,15 +33,20 @@ class HistoryTransactionFragment : Fragment() {
         binding.vHistoryTransaction.rvHistoryTransaction.adapter = HistoryTransactionAdapter(
             data = populateDataHistoryTransaction(),
             onClickHistoryTransaction = {
-                navigateToDetailHistory()
+//                navigateToDetailHistory()
+                DetailTransactionActivity.navigateToDetailTransaction(
+                    activity = requireActivity(),
+                    data = it
+                )
             }
         )
     }
 
-    private fun navigateToDetailHistory(){
-        val intent = Intent(context, DetailTransactionActivity::class.java)
-        startActivity(intent)
-    }
+//    private fun navigateToDetailHistory(data: HistoryTransactionModel){
+//        val intent = Intent(context, DetailTransactionActivity::class.java)
+//        intent.putExtra("", data)
+//        startActivity(intent)
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
