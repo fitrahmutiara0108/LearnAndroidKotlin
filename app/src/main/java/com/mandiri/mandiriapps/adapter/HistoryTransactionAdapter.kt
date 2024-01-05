@@ -11,7 +11,7 @@ import com.mandiri.mandiriapps.model.StatusTransaction
 import com.mandiri.mandiriapps.model.StatusTransfer
 
 class HistoryTransactionAdapter(
-    private val data: List<HistoryTransactionModel>,
+    private var data: List<HistoryTransactionModel>,
     private val onClickHistoryTransaction: (HistoryTransactionModel) -> Unit
 ) : RecyclerView.Adapter<HistoryTransactionAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,6 +28,11 @@ class HistoryTransactionAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(data[position])
+    }
+
+    fun filterTransactionData(updatedData: List<HistoryTransactionModel>){
+        this.data = updatedData
+        notifyDataSetChanged()
     }
 
     inner class ViewHolder(val binding: ItemHistoryTransactionBinding) :
