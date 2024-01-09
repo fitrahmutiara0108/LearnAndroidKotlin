@@ -2,11 +2,12 @@ package com.mandiri.mandiriapps.helper
 
 import android.content.Context
 import android.content.SharedPreferences
+import javax.inject.Inject
 
-class SharedPref(context: Context) {
+class SharedPrefHelper @Inject constructor(private val sharedPreferences: SharedPreferences) {
 
-    private val sharedPreferences: SharedPreferences =
-        context.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
+//    private val sharedPreferences: SharedPreferences =
+//        context.getSharedPreferences(TOKEN_KEY, Context.MODE_PRIVATE)
 
     fun saveToken(token: String) {
         sharedPreferences.edit().putString(TOKEN_KEY, token).apply()
@@ -23,7 +24,7 @@ class SharedPref(context: Context) {
     }
 
     companion object {
-        private const val SHARED_PREF = "mypref"
+//        private const val SHARED_PREF = "mypref"
         private const val TOKEN_KEY = "token_key"
     }
 }

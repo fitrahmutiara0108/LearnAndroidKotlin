@@ -7,22 +7,25 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import com.mandiri.mandiriapps.databinding.ActivityLoginBinding
-import com.mandiri.mandiriapps.helper.SharedPref
+import com.mandiri.mandiriapps.helper.SharedPrefHelper
 import com.mandiri.mandiriapps.presentation.home.HomeActivity
-import com.mandiri.mandiriapps.presentation.message.MessageFragment
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.UUID
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var sharedPref: SharedPref
+
+    @Inject
+    lateinit var sharedPrefHelper: SharedPrefHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        sharedPref = SharedPref(context = this@LoginActivity)
+//        sharedPrefHelper = SharedPrefHelper(context = this@LoginActivity)
         checkTokenAvailability()
         handleLogin()
     }
@@ -59,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
                     handleVisibility(tvErrorPassword, false)
                     handleNavigation()
                     val dummyToken:String = UUID.randomUUID().toString()
-                    sharedPref.saveToken(dummyToken)
+                    sharedPrefHelper.saveToken(dummyToken)
 //                    tvErrorPassword.visibility = View.VISIBLE
                 } else {
                     Toast.makeText(this@LoginActivity, "Gagal", Toast.LENGTH_SHORT).show()
@@ -81,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun checkTokenAvailability(){
-        val token = sharedPref.getToken()
+        val token = sharedPrefHelper.getToken()
         if (!token.isEmpty()){
             handleNavigation()
         }
