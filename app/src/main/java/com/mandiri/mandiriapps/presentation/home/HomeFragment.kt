@@ -15,15 +15,36 @@ import com.mandiri.mandiriapps.adapter.EwalletAdapter
 import com.mandiri.mandiriapps.adapter.MenuHomeAdapter
 import com.mandiri.mandiriapps.adapter.SavingAdapter
 import com.mandiri.mandiriapps.adapter.ServiceMenuAdapter
+import com.mandiri.mandiriapps.base.BaseFragment
 import com.mandiri.mandiriapps.databinding.FragmentHomeBinding
 import com.mandiri.mandiriapps.helper.SharedPref
 import com.mandiri.mandiriapps.model.EwalletModel
 import com.mandiri.mandiriapps.model.SavingModel
 import com.mandiri.mandiriapps.model.ServiceModel
 
-class HomeFragment : Fragment() {
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+//    private var _binding: FragmentHomeBinding? = null
+//    private val binding get() = _binding!!
+    override fun inflateBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentHomeBinding {
+        return FragmentHomeBinding.inflate(inflater, container, false)
+    }
+
+    override fun setupView() {
+        sharedPref = SharedPref(requireContext())
+        binding.vComponentHomeEwallet.rvEwallet.adapter = ewalletAdapter
+        ewalletAdapter.setDataEwallet(createDummyEwalletList())
+
+        listSaving=populateSavingData()
+        savingAdapter= SavingAdapter(listSaving)
+        binding.vComponentHomeSaving.rvSaving.adapter = savingAdapter
+
+        setUpViewService()
+        setUpViewEwallet()
+        updateSaving()
+    }
 //    simbol ! untuk menandakan tidak null
 
     private var ewalletAdapter = EwalletAdapter()
@@ -36,28 +57,17 @@ class HomeFragment : Fragment() {
     private lateinit var  listServiceMenu:MutableList<ServiceModel>
     private lateinit var sharedPref: SharedPref
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View {
+//        return FragmentHomeBinding.inflate(inflater, container, false).root
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
-        sharedPref = SharedPref(requireContext())
-        binding.vComponentHomeEwallet.rvEwallet.adapter = ewalletAdapter
-        ewalletAdapter.setDataEwallet(createDummyEwalletList())
 
-        listSaving=populateSavingData()
-        savingAdapter= SavingAdapter(listSaving)
-        binding.vComponentHomeSaving.rvSaving.adapter = savingAdapter
-
-        setUpViewService()
-        setUpViewEwallet()
-        updateSaving()
     }
 
     private fun setupLogOut(){
@@ -162,10 +172,10 @@ class HomeFragment : Fragment() {
     }
 
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        _binding = null
+//    }
 
 
 }

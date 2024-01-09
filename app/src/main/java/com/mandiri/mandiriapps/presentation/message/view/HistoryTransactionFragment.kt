@@ -10,53 +10,28 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.mandiri.mandiriapps.R
 import com.mandiri.mandiriapps.adapter.HistoryTransactionAdapter
+import com.mandiri.mandiriapps.base.BaseFragment
 import com.mandiri.mandiriapps.databinding.FragmentHistoryTransactionBinding
 import com.mandiri.mandiriapps.model.HistoryTransactionModel
 import com.mandiri.mandiriapps.presentation.DetailTransactionActivity
 import com.mandiri.mandiriapps.presentation.HomeMainActivity
 import com.mandiri.mandiriapps.utils.ConfirmationDialogUtil
 
-class HistoryTransactionFragment : Fragment() {
+class HistoryTransactionFragment : BaseFragment<FragmentHistoryTransactionBinding>() {
     private var _historyAdapter: HistoryTransactionAdapter? = null
     private var _historyTransactionData: List<HistoryTransactionModel>? = null
     private var _binding: FragmentHistoryTransactionBinding? = null
     private lateinit var data: HistoryTransactionModel
     private lateinit var dialogConfirmation: ConfirmationDialogUtil
-    private val binding get() = _binding!!
-//    simbol ! untuk menandakan tidak null
-
-    override fun onCreateView(
+//    private val binding get() = _binding!!
+    override fun inflateBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHistoryTransactionBinding.inflate(layoutInflater)
-
-        setupViewHistoryBinding()
-        return binding.root
+        container: ViewGroup?
+    ): FragmentHistoryTransactionBinding {
+        return FragmentHistoryTransactionBinding.inflate(inflater, container, false)
     }
 
-    private fun setupViewHistoryBinding() {
-        _historyTransactionData = populateDataHistoryTransaction()
-        _historyAdapter = HistoryTransactionAdapter(
-            data = populateDataHistoryTransaction(),
-            onClickHistoryTransaction = {
-                data = it
-                showConfirmation()
-            }
-        )
-        binding.vHistoryTransaction.rvHistoryTransaction.adapter = _historyAdapter
-    }
-
-
-//    private fun navigateToDetailHistory(data: HistoryTransactionModel) {
-//        val intent = Intent(context, DetailTransactionActivity::class.java)
-//        intent.putExtra("", data)
-//        startActivity(intent)
-//    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun setupView() {
         dialogConfirmation = ConfirmationDialogUtil(requireContext())
 
         setupViewHistoryBinding()
@@ -92,12 +67,48 @@ class HistoryTransactionFragment : Fragment() {
 
             }
     }
+//    simbol ! untuk menandakan tidak null
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        //to avoid memory leaks, nullify the binding object on this method
-        _binding = null
+
+    private fun setupViewHistoryBinding() {
+        _historyTransactionData = populateDataHistoryTransaction()
+        _historyAdapter = HistoryTransactionAdapter(
+            data = populateDataHistoryTransaction(),
+            onClickHistoryTransaction = {
+                data = it
+                showConfirmation()
+            }
+        )
+        binding.vHistoryTransaction.rvHistoryTransaction.adapter = _historyAdapter
     }
+
+
+//    private fun navigateToDetailHistory(data: HistoryTransactionModel) {
+//        val intent = Intent(context, DetailTransactionActivity::class.java)
+//        intent.putExtra("", data)
+//        startActivity(intent)
+//    }
+
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View {
+//        _binding = FragmentHistoryTransactionBinding.inflate(layoutInflater)
+//
+//        setupViewHistoryBinding()
+//        return binding.root
+//    }
+//
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//    }
+//
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        //to avoid memory leaks, nullify the binding object on this method
+//        _binding = null
+//    }
 
     private fun populateDataHistoryTransaction(): List<HistoryTransactionModel> {
         return listOf(
