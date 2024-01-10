@@ -30,15 +30,12 @@ class EwalletAdapter : RecyclerView.Adapter<EwalletAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = listEwallet.size
 
-    inner class ViewHolder (private val itemBinding: ItemEwalletBinding) : RecyclerView.ViewHolder(itemBinding.root){
-//        val exampleList = mutableListOf<EwalletModel>()
-//        val ewalletModel = EwalletModel(name = "Tiara", image = 4016, balance = 2.3, isConnected = false)
+    inner class ViewHolder(private val itemBinding: ItemEwalletBinding) : RecyclerView.ViewHolder(itemBinding.root) {
 
-        fun bind(ewallet: EwalletModel, onClickEwallet: (EwalletModel) -> Unit){
-
-            if(ewallet.isConnected){
-                  itemBinding.tvBalance.visibility = View.VISIBLE
-                  itemBinding.btnConnectAccount.visibility = View.GONE
+        fun bind(ewallet: EwalletModel, onClickEwallet: (EwalletModel) -> Unit) {
+            if (ewallet.isConnected) {
+                itemBinding.tvBalance.visibility = View.VISIBLE
+                itemBinding.btnConnectAccount.visibility = View.GONE
             } else {
                 itemBinding.tvBalance.visibility = View.GONE
                 itemBinding.btnConnectAccount.visibility = View.VISIBLE
@@ -46,10 +43,10 @@ class EwalletAdapter : RecyclerView.Adapter<EwalletAdapter.ViewHolder>() {
 
             itemBinding.tvBalance.text = ewallet.balance.toString()
             itemBinding.ivEwallet.setImageResource(ewallet.image)
-            itemBinding.btnConnectAccount.setOnClickListener{
+            itemBinding.btnConnectAccount.setOnClickListener {
                 onClickEwallet.invoke(ewallet)
             }
-
         }
     }
+
 }

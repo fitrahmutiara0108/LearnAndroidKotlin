@@ -8,10 +8,15 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 //fungsi view model untuk single responsibility
+
+//kegunaan view model biasanya ketika hp di rotate datanya ga ilang, tetep aman
+//kalo ga pake itu ada kemungkinan ketika dirotate data hilang
+//live data digunakan agar UI mendapat data terbaru
+
+
 @HiltViewModel
 class NotificationViewModel @Inject constructor() : ViewModel() {
-    //kegunaan live data biasanya ketika hp di rotate datanya ga ilang, tetep aman
-    //kalo ga pake itu ada kemungkinan ketika dirotate data hilang
+
     private val _notificationData = MutableLiveData<List<NotificationModel>>()
     val notificationData: LiveData<List<NotificationModel>> = _notificationData
 

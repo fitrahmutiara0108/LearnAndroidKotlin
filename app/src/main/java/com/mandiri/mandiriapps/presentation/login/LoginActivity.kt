@@ -1,14 +1,18 @@
-package com.mandiri.mandiriapps.presentation
+package com.mandiri.mandiriapps.presentation.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.mandiri.mandiriapps.databinding.ActivityLoginBinding
 import com.mandiri.mandiriapps.helper.SharedPrefHelper
+import com.mandiri.mandiriapps.presentation.HomeMainActivity
+import com.mandiri.mandiriapps.presentation.RegisterActivity
 import com.mandiri.mandiriapps.presentation.home.HomeActivity
+import com.mandiri.mandiriapps.presentation.login.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.UUID
 import javax.inject.Inject
@@ -19,25 +23,20 @@ class LoginActivity : AppCompatActivity() {
 
     @Inject
     lateinit var sharedPrefHelper: SharedPrefHelper
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        sharedPrefHelper = SharedPrefHelper(context = this@LoginActivity)
         checkTokenAvailability()
         handleLogin()
+        observeLoginSuccess()
     }
 
     private fun handleVisibility(view: View, isVisible: Boolean) {
         view.isVisible = isVisible
-    }
-
-    private fun handleNavigateToHome() {
-        val intent = Intent(this, HomeActivity::class.java)
-        startActivity(intent)
-        finish()
     }
 
     private fun handleNavigation() {
@@ -46,35 +45,35 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun handleNavigateToRegister() {
-        val intent = Intent(this, RegisterActivity::class.java)
-        startActivity(intent)
-        finish()
+    private fun observeLoginSuccess() {
+        viewModel.loginSuccess.observe(this, { success ->
+            if (success) {
+                Toast.makeText(applicationContext, "Berhasil", Toast.LENGTH_SHORT).show()
+                handleVisibility(binding.tvErrorPassword, false)
+                handleNavigation()
+            } else {
+                Toast.makeText(this@LoginActivity, "Gagal", Toast.LENGTH_SHORT).show()
+                handleVisibility(binding.tvErrorPassword, true)
+            }
+        })
     }
 
     private fun handleLogin() {
-        val password = "admin1234"
-
         binding.apply {
             btnSubmit.setOnClickListener {
-                if (etInputPassword.text.toString() == password) {
-                    Toast.makeText(applicationContext, "Berhasil", Toast.LENGTH_SHORT).show()
-                    handleVisibility(tvErrorPassword, false)
-                    handleNavigation()
-                    val dummyToken:String = UUID.randomUUID().toString()
-                    sharedPrefHelper.saveToken(dummyToken)
-//                    tvErrorPassword.visibility = View.VISIBLE
-                } else {
-                    Toast.makeText(this@LoginActivity, "Gagal", Toast.LENGTH_SHORT).show()
-//                    tvErrorPassword.visibility = View.VISIBLE
-                    handleVisibility(tvErrorPassword, true)
-                }
+                val enteredPassword = etInputPassword.text.toString()
+                viewModel.login(enteredPassword)
             }
 
             btnRegister.setOnClickListener {
-//                    handleNavigateToRegister()
                 handleTo(RegisterActivity::class.java)
             }
+        }
+    }
+
+    private fun checkTokenAvailability() {
+        if (viewModel.isTokenAvailable()) {
+            handleNavigation()
         }
     }
 
@@ -83,10 +82,4 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun checkTokenAvailability(){
-        val token = sharedPrefHelper.getToken()
-        if (!token.isEmpty()){
-            handleNavigation()
-        }
-    }
 }

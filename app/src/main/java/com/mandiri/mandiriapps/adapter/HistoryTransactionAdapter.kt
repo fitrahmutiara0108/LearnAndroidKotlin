@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mandiri.mandiriapps.R
 import com.mandiri.mandiriapps.databinding.ItemHistoryTransactionBinding
-import com.mandiri.mandiriapps.databinding.ItemServiceBinding
 import com.mandiri.mandiriapps.model.HistoryTransactionModel
 import com.mandiri.mandiriapps.model.StatusTransaction
 import com.mandiri.mandiriapps.model.StatusTransfer

@@ -11,6 +11,7 @@ import com.mandiri.mandiriapps.R
 import com.mandiri.mandiriapps.databinding.HomeMainActivityBinding
 import com.mandiri.mandiriapps.helper.SharedPrefHelper
 import com.mandiri.mandiriapps.presentation.home.HomeFragment
+import com.mandiri.mandiriapps.presentation.login.LoginActivity
 import com.mandiri.mandiriapps.presentation.message.MessageFragment
 import com.mandiri.mandiriapps.utils.ConfirmationDialogUtil
 import dagger.hilt.android.AndroidEntryPoint
