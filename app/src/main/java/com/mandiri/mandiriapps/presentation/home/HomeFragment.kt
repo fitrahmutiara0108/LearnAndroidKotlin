@@ -28,7 +28,6 @@ import javax.inject.Inject
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private lateinit var listSaving: MutableList<SavingModel>
     private lateinit var listServiceMenu: MutableList<ServiceModel>
-//    private var dummyEwalletList: MutableList<EwalletModel>? = null
     private val viewModel: HomeViewModel by viewModels()
 
     override fun inflateBinding(
